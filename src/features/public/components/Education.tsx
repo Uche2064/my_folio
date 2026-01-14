@@ -45,33 +45,33 @@ export default function Education() {
   return (
     <section
       id="parcours"
-      className="py-20 bg-gradient-to-b from-neutral-950 via-neutral-900 to-neutral-950"
+      className="py-20 bg-linear-to-b from-white via-neutral-50 to-white dark:from-neutral-950 dark:via-neutral-900 dark:to-neutral-950"
     >
      <div className="max-w-7xl mx-auto px-4">
-       <div className="grid gap-6 rounded-2xl border border-cyan-500/20 bg-neutral-900/50 backdrop-blur-sm px-6 py-8 shadow-2xl shadow-black/50 lg:grid-cols-2 sm:px-10">
+       <div className="grid gap-6 rounded-2xl border border-cyan-500/20 bg-white backdrop-blur-sm px-6 py-8 shadow-md shadow-black/10 lg:grid-cols-2 sm:px-10 dark:bg-neutral-900/50 dark:shadow-black/50">
        <div className="space-y-4">
-        <p className="text-sm uppercase tracking-[0.2em] text-cyan-400 font-semibold">
+        <p className="text-sm uppercase tracking-[0.2em] text-cyan-600 font-semibold dark:text-cyan-400">
           Education
         </p>
-        <h2 className="text-2xl font-bold text-white sm:text-3xl">
+        <h2 className="text-2xl font-bold text-neutral-900 sm:text-3xl dark:text-white">
           Parcours académique
         </h2>
         <div className="space-y-4">
           {education.map((item, index) => (
             <div
               key={item.title}
-              className="group relative rounded-xl border border-cyan-500/30 bg-neutral-800/50 px-4 py-4 shadow-lg transition-all duration-300 hover:border-cyan-500/60 hover:shadow-cyan-500/10 hover:-translate-y-1"
+              className="group relative rounded-xl border border-cyan-500/30 bg-white px-4 py-4 shadow-lg transition-all duration-300 hover:border-cyan-500/60 hover:shadow-cyan-500/10 hover:-translate-y-1 dark:bg-neutral-800/50"
             >
-              <div className="absolute -left-3 top-6 h-3 w-3 rounded-full bg-cyan-500 shadow-lg shadow-cyan-500/50 ring-4 ring-neutral-900" />
+              <div className="absolute -left-3 top-6 h-3 w-3 rounded-full bg-cyan-500 shadow-lg shadow-cyan-500/50 ring-4 ring-white dark:ring-neutral-900" />
               <div className="flex items-start justify-between gap-3">
-                <h3 className="text-lg font-bold text-white group-hover:text-cyan-400 transition-colors duration-200">
+                <h3 className="text-lg font-bold text-neutral-900 group-hover:text-cyan-600 transition-colors duration-200 dark:text-white dark:group-hover:text-cyan-400">
                   {item.title}
                 </h3>
-                <span className="text-sm font-semibold text-cyan-400 whitespace-nowrap">
+                <span className="text-sm font-semibold text-cyan-600 whitespace-nowrap dark:text-cyan-400">
                   {item.period}
                 </span>
               </div>
-              <p className="mt-2 text-sm text-neutral-300 leading-relaxed">
+              <p className="mt-2 text-sm text-neutral-600 leading-relaxed dark:text-neutral-300">
                 {item.description}
               </p>
             </div>
@@ -80,28 +80,28 @@ export default function Education() {
       </div>
 
       <div className="space-y-4">
-        <p className="text-sm uppercase tracking-[0.2em] text-cyan-400 font-semibold">
+        <p className="text-sm uppercase tracking-[0.2em] text-cyan-600 font-semibold dark:text-cyan-400">
           Expériences
         </p>
-        <h2 className="text-2xl font-bold text-white sm:text-3xl">
+        <h2 className="text-2xl font-bold text-neutral-900 sm:text-3xl dark:text-white">
           Projets & stages
         </h2>
         <div className="space-y-4">
           {experiences.map((item, index) => (
             <div
               key={item.title}
-              className="group relative rounded-xl border border-cyan-500/30 bg-neutral-800/50 px-4 py-4 shadow-lg transition-all duration-300 hover:border-cyan-500/60 hover:shadow-cyan-500/10 hover:-translate-y-1"
+              className="group relative rounded-xl border border-cyan-500/30 bg-white px-4 py-4 shadow-lg transition-all duration-300 hover:border-cyan-500/60 hover:shadow-cyan-500/10 hover:-translate-y-1 dark:bg-neutral-800/50"
             >
-              <div className="absolute -left-3 top-6 h-3 w-3 rounded-full bg-cyan-500 shadow-lg shadow-cyan-500/50 ring-4 ring-neutral-900" />
+              <div className="absolute -left-3 top-6 h-3 w-3 rounded-full bg-cyan-500 shadow-lg shadow-cyan-500/50 ring-4 ring-white dark:ring-neutral-900" />
               <div className="flex items-start justify-between gap-3">
-                <h3 className="text-base font-bold text-white group-hover:text-cyan-400 transition-colors duration-200">
+                <h3 className="text-base font-bold text-neutral-900 group-hover:text-cyan-600 transition-colors duration-200 dark:text-white dark:group-hover:text-cyan-400">
                   {item.title}
                 </h3>
-                <span className="text-xs font-semibold text-cyan-400 whitespace-nowrap">
+                <span className="text-xs font-semibold text-cyan-600 whitespace-nowrap dark:text-cyan-400">
                   {item.period}
                 </span>
               </div>
-              <ul className="mt-3 space-y-2 text-sm text-neutral-300">
+              <ul className="mt-3 space-y-2 text-sm text-neutral-600 dark:text-neutral-300">
                 {item.details.map((detail) => (
                   <li key={detail} className="flex gap-3">
                     <span className="mt-1.5 h-1.5 w-1.5 flex-shrink-0 rounded-full bg-cyan-500 shadow-sm shadow-cyan-500/50" />
