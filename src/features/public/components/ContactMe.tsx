@@ -1,8 +1,7 @@
-import { Button } from "@/components/ui/button";
-import { Input } from "@/components/ui/input";
-import { Textarea } from "@/components/ui/textarea";
+import ContactMeForm from "../forms/ContactMeForm";
 
-export default function ContactForm() {
+export default function ContactMe() {
+
   return (
     <section
       id="contact"
@@ -62,40 +61,7 @@ export default function ContactForm() {
                 Laissez votre email et un résumé, je reviens vers vous sous 24h.
               </p>
             </div>
-            <form className="space-y-3">
-              <div className="space-y-1.5">
-                <label className="text-sm font-medium text-foreground dark:text-white">
-                  Nom
-                </label>
-                <Input placeholder="Votre nom" required />
-              </div>
-              <div className="space-y-1.5">
-                <label className="text-sm font-medium text-foreground dark:text-white">
-                  Email
-                </label>
-                <Input type="email" placeholder="vous@email.com" required />
-              </div>
-              <div className="space-y-1.5">
-                <label className="text-sm font-medium text-foreground dark:text-white">
-                  Message
-                </label>
-                <Textarea placeholder="Parlez brièvement de votre besoin..." />
-              </div>
-              <div className="flex flex-col gap-2 sm:flex-row sm:items-center sm:justify-between">
-                <Button type="submit" className="w-full sm:w-auto">
-                  Envoyer
-                </Button>
-                <span className="text-xs text-neutral-600 dark:text-neutral-300">
-                  Ou écrivez-moi directement :{" "}
-                  <a
-                    className="underline decoration-neutral-400 underline-offset-4 dark:decoration-white/40"
-                    href="mailto:godswilllek02@gmail.com"
-                  >
-                    godswilllek02@gmail.com
-                  </a>
-                </span>
-              </div>
-            </form>
+           <ContactMeForm />
           </div>
         </div>
       </div>
