@@ -52,10 +52,9 @@ export default function MobileMenu({
           <Link href="#contact" onClick={handleLinkClick}>
             <Button className="w-full mt-4">Contact</Button>
           </Link>
-          
         </nav>
         <SheetFooter className="flex flex-row items-center justify-between">
-            <ModeToggle />
+          <ModeToggle />
 
           <SheetClose asChild>
             <Button variant="ghost">Fermer</Button>
