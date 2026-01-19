@@ -1,13 +1,10 @@
 import { ModeToggle } from "@/components/shared/ModeToggle";
-import { Button } from "../../../components/ui/button";
+import { Button } from "../../../../components/ui/button";
 import Image from "next/image";
+import { Hamburger, Menu } from "lucide-react";
+import { NavMenu } from "./NavMenu";
 
-const navLinks = [
-  { href: "#hero", label: "Accueil" },
-  { href: "#travaux", label: "Travaux" },
-  { href: "#parcours", label: "Parcours" },
-  { href: "#competences", label: "Compétences" },
-];
+
 
 export default function Navbar() {
   return (
@@ -24,7 +21,7 @@ export default function Navbar() {
               priority
             />
           </div>
-          <div>
+          <div className="hidden md:block">
             <p className="text-xs uppercase tracking-[0.2em] text-cyan-600 font-medium dark:text-cyan-400">
               Portfolio
             </p>
@@ -33,27 +30,8 @@ export default function Navbar() {
             </p>
           </div>
         </div>
-        <nav className="hidden items-center gap-2 text-sm text-neutral-600 md:flex dark:text-neutral-300">
-          {navLinks.map((link: { href: string; label: string }) => (
-            <a
-              key={link.href}
-              href={link.href}
-              className="rounded-full px-4 py-2 transition-all duration-200 hover:bg-cyan-500/10 hover:text-cyan-600 hover:scale-105 dark:hover:text-cyan-400"
-            >
-              {link.label}
-            </a>
-          ))}
-          <Button 
-            asChild 
-            size="sm" 
-            className="ml-2 bg-cyan-600 text-white font-semibold hover:bg-cyan-500 hover:shadow-lg hover:shadow-cyan-500/50 transition-all duration-200 hover:scale-105 dark:bg-cyan-500 dark:text-black"
-          >
-            <a href="#contact">Contact</a>
-          </Button>
-          <ModeToggle />
-        </nav>
+        <NavMenu />
       </div>
     </nav>
-    
   );
 }

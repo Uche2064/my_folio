@@ -1,10 +1,10 @@
-import Navbar from "@/features/public/components/Navbar"
-import Hero from "@/features/public/components/Hero"
-import Works from "@/features/public/components/Works"
-import Education from "@/features/public/components/Education"
-import Skills from "@/features/public/components/Skills"
-import ContactForm from "@/features/public/components/ContactMe"
-import Footer from "@/features/public/components/Footer"
+import Navbar from "@/features/public/components/Navbar/Navbar";
+import Hero from "@/features/public/components/Hero";
+import Works from "@/features/public/components/Works";
+import Education from "@/features/public/components/Education";
+import Skills from "@/features/public/components/Skills";
+import ContactForm from "@/features/public/components/ContactMe";
+import Footer from "@/features/public/components/Footer";
 
 export default function Home() {
   return (
@@ -13,13 +13,13 @@ export default function Home() {
       <Navbar />
       <main className="">
         {/* Hero */}
-       <Hero />
+        <Hero />
 
         {/* Works */}
         <Works />
 
-       {/* Education */}
-       <Education />
+        {/* Education */}
+        <Education />
 
         {/* Skills */}
         <Skills />
@@ -29,5 +29,5 @@ export default function Home() {
       </main>
       <Footer />
     </div>
-  )
+  );
 }
