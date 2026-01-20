@@ -10,26 +10,27 @@ import {
 import Link from "next/link";
 
 interface DesktopMenuProps {
-    navLinks: { href: string; label: string }[];
+  navLinks: { href: string; label: string }[];
 }
 
-export default function DesktopMenu({navLinks}: DesktopMenuProps) {
+export default function DesktopMenu({ navLinks }: DesktopMenuProps) {
   return (
     <NavigationMenu>
       <NavigationMenuList>
         {navLinks.map((link) => (
           <NavigationMenuItem key={link.href}>
-            <Link href={link.href} passHref>
-              <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                {link.label}
-              </NavigationMenuLink>
-            </Link>
+            <NavigationMenuLink
+              asChild
+              className={navigationMenuTriggerStyle()}
+            >
+              <Link href={link.href}>{link.label}</Link>
+            </NavigationMenuLink>
           </NavigationMenuItem>
         ))}
         <NavigationMenuItem>
-          <Link href="#contact">
-            <Button>Contact</Button>
-          </Link>
+          <Button asChild>
+            <Link href="#contact">Contact</Link>
+          </Button>
         </NavigationMenuItem>
         <NavigationMenuItem>
           <ModeToggle />

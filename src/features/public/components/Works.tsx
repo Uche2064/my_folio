@@ -13,19 +13,19 @@ export default function Works() {
   const featuredProjects = [
     {
       title: "Direction artistique & présentation",
-      image: "/soutenance.jpeg",
+      image: "/logo.png",
       description:
         "Storytelling visuel et mise en page épurée pour captiver l'audience.",
     },
     {
       title: "Editorial lookbook",
-      image: "/blue_dress.jpeg",
+      image: "/logo.png",
       description:
         "Série photo minimaliste sur fond neutre avec une palette froide.",
     },
     {
       title: "Portraits en lumière douce",
-      image: "/yellow_dress.jpeg",
+      image: "/logo.png",
       description:
         "Portraits contrastés mais élégants, travaillés pour rester intemporels.",
     },

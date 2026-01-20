@@ -4,7 +4,9 @@ import { getToken } from "next-auth/jwt";
 
 export default async function middleware(req: NextRequest) {
   const { pathname, origin, search } = req.nextUrl;
-
+  console.log(pathname);
+  console.log(origin);
+  console.log(search)
   // Only apply logic for admin routes
   if (!pathname.startsWith("/admin")) {
     return NextResponse.next();

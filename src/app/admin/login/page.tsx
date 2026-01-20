@@ -3,14 +3,21 @@
 import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import { useState, useCallback, useEffect } from "react";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
+import { Lock, Mail, User2 } from "lucide-react";
+import AppInput from "@/components/shared/AppInput";
+import { Spinner } from "@/components/ui/spinner";
+import { toast } from "sonner";
+import { validateEmail, validatePasswordForLogin } from "@/lib/validator";
 
 export default function LoginPage() {
   const { data: session, status } = useSession();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState<string | null>(null);
+  const [error, setError] = useState({
+    email: "",
+    password: "",
+  });
   const [loading, setLoading] = useState(false);
   const router = useRouter();
 
@@ -22,47 +29,51 @@ export default function LoginPage() {
     }
   }, [status, router]);
 
-  const handleSubmit = useCallback(
-    async (e: React.FormEvent) => {
-      e.preventDefault();
-      setError(null);
-      setLoading(true);
-
-      try {
-        const res = await signIn("credentials", {
-          redirect: false,
-          email,
-          password,
-        } as any);
-
-        // res can be undefined in some cases; guard accordingly
-        if (!res) {
-          setError("Unexpected error. Please try again.");
-          setLoading(false);
-          return;
-        }
-
-        // NextAuth returns an object possibly containing error
-        // type is any here because client-side typings vary by version
-        if ((res as any).error) {
-          setError((res as any).error || "Invalid credentials");
-          setLoading(false);
-          return;
-        }
-
-        // Successful sign-in: navigate to admin root
-        router.push("/admin");
-      } catch (err) {
-        setError(
-          "Sign in failed. Please check your credentials and try again.",
-        );
-      } finally {
-        setLoading(false);
+  const handleSubmit = async () => {
+    setLoading(true);
+    try {
+      const emailError = validateEmail(email);
+      const passwordError = validatePasswordForLogin(password);
+      if (emailError || passwordError) {
+        setError({
+          email: emailError,
+          password: passwordError,
+        });
+        // setLoading(false);
+        return;
       }
-    },
-    [email, password, router],
-  );
-
+      const res = await signIn("credentials", {
+        email,
+        password,
+        redirect: false,
+      });
+      console.log(res);
+      if (!res) {
+        setError({
+          email: "Unexpected error. Please try again.",
+          password: "Unexpected error. Please try again.",
+        });
+        setLoading(false);
+        return;
+      }
+      if (res.error) {
+        toast.error("Invalid credentials");
+        setLoading(false);
+        return;
+      }
+      toast.success("Login successful");
+      router.push("/admin");
+    } catch (err) {
+      setError({
+        email: "Sign in failed. Please check your credentials and try again.",
+        password:
+          "Sign in failed. Please check your credentials and try again.",
+      });
+      toast.error("Sign in failed. Please check your credentials and try again.");
+    } finally {
+      setLoading(false);
+    }
+  };
   return (
     <div className="min-h-screen flex items-center justify-center bg-background">
       <div className="max-w-md w-full bg-white dark:bg-neutral-900 border border-neutral-200 dark:border-neutral-800 rounded-xl p-8 shadow-sm">
@@ -73,60 +84,47 @@ export default function LoginPage() {
           Sign in with your admin credentials to manage projects and content.
         </p>
 
-        <form onSubmit={handleSubmit} className="space-y-4">
-          <div>
-            <label
-              htmlFor="email"
-              className="block text-sm font-medium text-neutral-700 dark:text-neutral-300"
-            >
-              Email
-            </label>
-            <Input
-              id="email"
-              name="email"
-              type="email"
-              required
-              value={email}
-              onChange={(e) => setEmail(e.target.value)}
-              placeholder="you@example.com"
-              className="mt-1"
-            />
-          </div>
+        <div className="space-y-4">
+          <AppInput
+            id="email"
+            label="Email"
+            type="email"
+            placeholder="vous@entreprise.com"
+            value={email}
+            leadingIcon={Mail}
+            error={error.email}
+            onChange={(e) => setEmail(e.target.value)}
+            disabled={loading}
+          />
 
-          <div>
-            <label
-              htmlFor="password"
-              className="block text-sm font-medium text-neutral-700 dark:text-neutral-300"
-            >
-              Password
-            </label>
-            <Input
-              id="password"
-              name="password"
-              type="password"
-              required
-              value={password}
-              onChange={(e) => setPassword(e.target.value)}
-              placeholder="••••••••"
-              className="mt-1"
-            />
-          </div>
+          {/* Mot de passe */}
+          <AppInput
+            id="password"
+            label="Mot de passe"
+            type="password"
+            placeholder="••••••••"
+            value={password}
+            error={error.password}
+            onChange={(e) => setPassword(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                handleSubmit();
+              }
+            }}
+            showPasswordToggle={true}
+            leadingIcon={Lock}
+            disabled={loading}
+          />
 
-          {error && <p className="text-sm text-red-600">{error}</p>}
-
-          <div className="pt-2">
-            <Button type="submit" className="w-full" disabled={loading}>
-              {loading ? "Signing in..." : "Sign in"}
-            </Button>
-          </div>
-        </form>
-
-        <div className="mt-6 text-sm text-neutral-500 dark:text-neutral-400">
-          <p>
-            Note: This panel is for your use only. If you haven't created your
-            admin user yet, create it in the database (hashed password) or run
-            the provided seed script.
-          </p>
+          {/* Bouton de connexion */}
+          <Button
+            onClick={handleSubmit}
+            disabled={loading}
+            size="icon-lg"
+            className="w-full"
+          >
+            {loading ? <Spinner /> : "Se connecter"}
+          </Button>
         </div>
       </div>
     </div>

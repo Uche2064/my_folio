@@ -35,11 +35,21 @@ const navLinks: { label: string; href: string }[] = [
 export function NavMenu() {
   const isMobile = useIsMobile();
   const [open, setOpen] = useState(false);
+  const [mounted, setMounted] = useState(false);
+
+  // Ensure component is mounted before rendering mobile/desktop specific UI
+  React.useEffect(() => {
+    setMounted(true);
+  }, []);
 
   // Ferme le menu quand on clique sur un lien
   const handleLinkClick = () => {
     setOpen(false);
   };
+
+  if (!mounted) {
+    return null; // Or a placeholder to maintain layout shift
+  }
 
   return (
     <>

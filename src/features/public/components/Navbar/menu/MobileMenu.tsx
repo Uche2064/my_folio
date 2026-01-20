@@ -49,9 +49,11 @@ export default function MobileMenu({
               {link.label}
             </Link>
           ))}
-          <Link href="#contact" onClick={handleLinkClick}>
-            <Button className="w-full mt-4">Contact</Button>
-          </Link>
+          <Button asChild className="w-full mt-4">
+            <Link href="#contact" onClick={handleLinkClick}>
+              Contact
+            </Link>
+          </Button>
         </nav>
         <SheetFooter className="flex flex-row items-center justify-between">
           <ModeToggle />
