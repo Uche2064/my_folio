@@ -75,11 +75,9 @@ model Project {
   coverImage String?
   liveUrl    String?
   repoUrl    String?
-  featured   Boolean      @default(false)
   published  Boolean      @default(true)
   createdAt  DateTime     @default(now())
   updatedAt  DateTime     @updatedAt
-
   gallery    Image[]
   techs      ProjectTech[]
 }

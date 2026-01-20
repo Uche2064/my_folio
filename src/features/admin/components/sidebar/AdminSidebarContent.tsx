@@ -1,52 +1,75 @@
-import { SidebarContent, SidebarGroup, SidebarGroupContent, SidebarGroupLabel, SidebarMenu, SidebarMenuButton, SidebarMenuItem } from "@/components/ui/sidebar";
-import { Calendar, Home, Inbox, Search, Settings, Toolbox } from "lucide-react";
+"use client";
 
+import Link from "next/link";
+import { usePathname } from "next/navigation";
+import {
+  SidebarContent,
+  SidebarGroup,
+  SidebarGroupContent,
+  SidebarGroupLabel,
+  SidebarMenu,
+  SidebarMenuButton,
+  SidebarMenuItem,
+} from "@/components/ui/sidebar";
+import { Home, Inbox, Toolbox, Settings } from "lucide-react";
+import { cn } from "@/lib/utils";
 
 const items = [
   {
     title: "Home",
-    url: "#",
+    url: "/admin",
     icon: Home,
   },
   {
     title: "Inbox",
-    url: "#",
+    url: "/admin/inbox",
     icon: Inbox,
   },
   {
     title: "Projects",
-    url: "#",
+    url: "/admin/projects",
     icon: Toolbox,
   },
   {
     title: "Settings",
-    url: "#",
+    url: "/admin/settings",
     icon: Settings,
   },
-]
+];
 
 export default function AdminSidebarContent() {
-
+  const pathname = usePathname() || "/admin";
 
   return (
     <SidebarContent>
-       <SidebarGroup>
-          <SidebarGroupLabel>MY FOLIO ADMIN PANEL</SidebarGroupLabel>
-          <SidebarGroupContent>
-            <SidebarMenu>
-              {items.map((item) => (
+      <SidebarGroup>
+        <SidebarGroupLabel>MY FOLIO ADMIN PANEL</SidebarGroupLabel>
+        <SidebarGroupContent>
+          <SidebarMenu>
+            {items.map((item) => {
+              const active = pathname === item.url;
+              return (
                 <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
-                      <item.icon />
+                  <SidebarMenuButton asChild tooltip={item.title}>
+                    <Link
+                      href={item.url}
+                      className={cn(
+                        "flex items-center gap-3 px-3 py-2 rounded-md transition-colors text-sm",
+                        active
+                          ? "bg-accent text-accent-foreground"
+                          : "hover:bg-accent/50 hover:text-accent-foreground",
+                      )}
+                    >
+                      <item.icon className="size-4" />
                       <span>{item.title}</span>
-                    </a>
+                    </Link>
                   </SidebarMenuButton>
                 </SidebarMenuItem>
-              ))}
-            </SidebarMenu>
-          </SidebarGroupContent>
-        </SidebarGroup>
+              );
+            })}
+          </SidebarMenu>
+        </SidebarGroupContent>
+      </SidebarGroup>
     </SidebarContent>
   );
 }

@@ -1,17 +1,26 @@
 "use client";
 
-import { signIn } from "next-auth/react";
+import { signIn, useSession } from "next-auth/react";
 import { useRouter } from "next/navigation";
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 
 export default function LoginPage() {
+  const { data: session, status } = useSession();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState<string | null>(null);
   const [loading, setLoading] = useState(false);
   const router = useRouter();
+
+  // If already authenticated, redirect immediately to /admin
+  useEffect(() => {
+    if (status === "authenticated") {
+      // use replace to avoid keeping the login page in history
+      router.replace("/admin");
+    }
+  }, [status, router]);
 
   const handleSubmit = useCallback(
     async (e: React.FormEvent) => {
