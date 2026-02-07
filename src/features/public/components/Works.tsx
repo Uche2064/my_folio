@@ -12,24 +12,33 @@ import {
 export default function Works() {
   const featuredProjects = [
     {
-      title: "Direction artistique & présentation",
-      image: "/logo.png",
+      title: "Assistant Médical Personnalisé - SUNU SANTE",
+      image: "/amp-images/medecin-controlleur-dash.png",
       description:
-        "Storytelling visuel et mise en page épurée pour captiver l'audience.",
+        "L'assistant médical personnalisé (AMP) est une solution qui permet de mettre en relation les assurés avec des prestataires de soins partenanire de Sunu Santé.",
     },
     {
-      title: "Editorial lookbook",
-      image: "/logo.png",
+      title: "Mon Portfolio",
+      image: "/portfolio-images/portfolio-1.png",
       description:
-        "Série photo minimaliste sur fond neutre avec une palette froide.",
+        "Alors mon portfolio est l'un de mes projets préféré parce que ça me permet de me vendre d'une façon unique. J'ai aussi une partie admin pour mon portofolio qui me permettra plus tard de gérer les différents projets(ajout, suppression, etc...), les contacts et peut-être un blog personnalisé.",
     },
-    {
-      title: "Portraits en lumière douce",
-      image: "/logo.png",
-      description:
-        "Portraits contrastés mais élégants, travaillés pour rester intemporels.",
-    },
+    // {
+    //   title: "Portraits en lumière douce",
+    //   image: "/logo.png",
+    //   description:
+    //     "Portraits contrastés mais élégants, travaillés pour rester intemporels.",
+    // },
   ];
+  function getProjectsDisplayStyle() {
+    if (featuredProjects.length === 1) {
+      return "md:basis-1/1 lg:basis-1/1";
+    } else if (featuredProjects.length === 2) {
+      return "md:basis-1/2 lg:basis-1/2";
+    } else {
+      return "md:basis-1/3 lg:basis-1/4";
+    }
+  }
   return (
     <section
       id="travaux"
@@ -56,7 +65,7 @@ export default function Works() {
             {featuredProjects.map((project) => (
               <CarouselItem
                 key={project.title}
-                className="md:basis-1/2 lg:basis-1/3"
+                className={getProjectsDisplayStyle()}
               >
                   <article className="border border-cyan-500/20 bg-white backdrop-blur-sm transition-all duration-300 hover:-translate-y-2 hover:shadow-xl hover:shadow-cyan-500/20 hover:border-cyan-500/50 dark:bg-neutral-900/50 dark:shadow-black/50 rounded-xl overflow-hidden">
                     <div className="relative h-60 overflow-hidden bg-neutral-200 dark:bg-neutral-800">
@@ -76,12 +85,12 @@ export default function Works() {
                       <p className="text-sm text-neutral-600 leading-relaxed dark:text-neutral-400">
                         {project.description}
                       </p>
-                      <div className="mt-auto flex items-center justify-between text-sm text-neutral-500 dark:text-neutral-500">
+                      {/* <div className="mt-auto flex items-center justify-between text-sm text-neutral-500 dark:text-neutral-500">
                         <span className="transition-colors duration-200 group-hover:text-cyan-600 dark:group-hover:text-cyan-400">
                           Prêt pour étude de cas
                         </span>
                         <span className="h-2 w-2 rounded-full bg-cyan-500 shadow-lg shadow-cyan-500/50 animate-pulse" />
-                      </div>
+                      </div> */}
                       <div className="pt-2">
                         <Button
                           variant="outline"

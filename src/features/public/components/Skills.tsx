@@ -7,7 +7,7 @@ const techSkills = {
     "React",
     "Next.js",
   ],
-  "Bases de données": ["MySQL", "PostgreSQL", "Firebase", "MongoDB", "GraphQL"],
+  "Bases de données": ["MySQL", "PostgreSQL", "Firebase", "MongoDB"],
   Autres: ["Conception orientée objet", "API REST", "UI/UX", "Design system"],
 };
 

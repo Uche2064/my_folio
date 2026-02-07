@@ -4,7 +4,6 @@ import "./globals.css";
 import { cn } from "@/lib/utils";
 import { ThemeProvider } from "@/components/theme-provider";
 import { Toaster } from "sonner";
-import SessionProvider from "@/components/SessionProvider";
 
 const poppins = Poppins({
   variable: "--font-poppins",
@@ -36,7 +35,6 @@ export default function RootLayout({
           "min-h-screen bg-background font-sans antialiased",
         )}
       >
-        <SessionProvider>
           <ThemeProvider
             attribute="class"
             defaultTheme="system"
@@ -46,7 +44,6 @@ export default function RootLayout({
             {children}
             <Toaster position="top-right" richColors />
           </ThemeProvider>
-        </SessionProvider>
       </body>
     </html>
   );

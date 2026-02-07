@@ -1,10 +1,10 @@
-import { NextAuthOptions } from "next-auth";
+import { NextAuthOptions, User } from "next-auth";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import { getServerSession as nextGetServerSession } from "next-auth";
 import bcrypt from "bcryptjs";
 
-import  prisma from "@/lib/prisma";
+import prisma from "@/lib/prisma";
 
 /**
  * Shared NextAuth options used by both the API route and server components.
@@ -20,7 +20,7 @@ import  prisma from "@/lib/prisma";
  * Sign-in page is set to `/admin/login` so the middleware and auth pages are consistent.
  */
 export const authOptions: NextAuthOptions = {
-  adapter: PrismaAdapter(prisma) as any,
+  adapter: PrismaAdapter(prisma),
   providers: [
     CredentialsProvider({
       name: "Credentials",
@@ -38,7 +38,10 @@ export const authOptions: NextAuthOptions = {
         if (!user) return null;
         if (!user.password) return null; // user may be created via OAuth without password
 
-        const isValid = await bcrypt.compare(credentials.password, user.password);
+        const isValid = await bcrypt.compare(
+          credentials.password,
+          user.password,
+        );
         if (!isValid) return null;
 
         // Return a minimal user object to NextAuth
@@ -46,7 +49,8 @@ export const authOptions: NextAuthOptions = {
           id: user.id,
           email: user.email,
           name: user.name ?? undefined,
-        } as any;
+          role: user.role,
+        } as User;
       },
     }),
     // Add OAuth providers here when needed (Google, GitHub, ...)
@@ -64,8 +68,8 @@ export const authOptions: NextAuthOptions = {
             select: { role: true, id: true },
           });
           if (dbUser) {
-            (token as any).role = dbUser.role;
-            (token as any).sub = dbUser.id;
+            token.role = dbUser.role;
+            token.sub = dbUser.id;
           }
         } catch {
           // ignore DB errors for token enrichment
@@ -75,9 +79,9 @@ export const authOptions: NextAuthOptions = {
     },
 
     async session({ session, token }) {
-      if (token) {
-        (session.user as any).id = (token as any).sub;
-        (session.user as any).role = (token as any).role;
+      if (token && session.user) {
+        (session.user as any).id = token.sub as string;
+        (session.user as any).role = token.role as string;
       }
       return session;
     },
