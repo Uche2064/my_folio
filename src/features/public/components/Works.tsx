@@ -109,14 +109,14 @@ export default function Works() {
             <CarouselPrevious className="border-cyan-500/40 text-cyan-700 hover:bg-cyan-50 dark:text-cyan-400" />
             <CarouselNext className="border-cyan-500/40 text-cyan-700 hover:bg-cyan-50 dark:text-cyan-400" />
           </div>
-          <div className="mt-4 flex items-center justify-center gap-4 px-2">
+          {/* <div className="mt-4 flex items-center justify-center gap-4 px-2">
             <Button>
               <div className="flex items-center justify-center gap-2">
                 <p>Voir plus</p>
                 <ChevronRight />
               </div>
             </Button>
-          </div>
+          </div> */}
         </Carousel>
       </div>
     </section>

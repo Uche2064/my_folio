@@ -1,7 +1,10 @@
 import nodemailer from "nodemailer";
 import { render } from "@react-email/render";
 import React from "react";
-import "dotenv/config";
+
+import dotenv from "dotenv";
+
+dotenv.config();
 
 // Configuration du transporteur Nodemailer avec Gmail
 const transporter = nodemailer.createTransport({
@@ -13,19 +16,20 @@ const transporter = nodemailer.createTransport({
   tls: {
     rejectUnauthorized: false,
   },
-  
 });
 
 /**
  * Envoie un email avec un composant React
- * @param from - Email de l'expéditeur
+ * @param senderName - Nom de l'expéditeur
+ * @param senderEmail - Email de l'expediteur
  * @param subject - Sujet de l'email
  * @param reactComponent - Composant React à envoyer
  */
 export async function sendEmail(
-  from: string | string[],
+  senderName: string,
+  senderEmail: string,
   subject: string,
-  reactComponent: React.ReactElement
+  reactComponent: React.ReactElement,
 ) {
   try {
     // Convertir le composant React en HTML
@@ -33,8 +37,9 @@ export async function sendEmail(
 
     // Préparer le message
     const message = {
-      from: from,
-      to: process.env.MY_EMAIL,
+      from: `"${senderName}" <${process.env.GMAIL_USER}>`,
+      to: process.env.ADMIN_EMAIL,
+      replyTo: senderEmail,
       subject,
       html,
       headers: {
@@ -44,7 +49,7 @@ export async function sendEmail(
 
     // Envoyer l'email
     const info = await transporter.sendMail(message);
-    
+
     // console.log("Email envoyé avec succès:", info.messageId);
     return { success: true, messageId: info.messageId };
   } catch (error) {

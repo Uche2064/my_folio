@@ -10,7 +10,6 @@ interface AppInputProps {
   required?: boolean;
   type?: "text" | "email" | "password" | "number" | "tel";
   placeholder?: string;
-  value: string;
   onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
   onKeyDown?: (e: React.KeyboardEvent<HTMLInputElement>) => void;
   disabled?: boolean;
@@ -27,7 +26,6 @@ export default function AppInput({
   required = false,
   type = "text",
   placeholder,
-  value,
   onChange,
   onKeyDown,
   disabled = false,
@@ -60,7 +58,6 @@ export default function AppInput({
           required={required}
           type={actualType}
           placeholder={placeholder}
-          value={value}
           onChange={onChange}
           disabled={disabled}
           onKeyDown={onKeyDown}
