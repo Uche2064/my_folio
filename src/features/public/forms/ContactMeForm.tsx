@@ -54,7 +54,7 @@ export default function ContactMeForm() {
             placeholder="Votre nom"
             disabled={isLoading}
             {...register("name", { required: "Ce champ est requis" })}
-            className="input rounded-md sm:col-span-1 dark:text-white transition-colors dark:bg-black/30 placeholder:text-muted-foreground"
+            className="input rounded-md w-full sm:col-span-1 dark:text-white transition-colors dark:bg-black/30 placeholder:text-muted-foreground"
           />
           {errors.name && (
             <p className="text-red-500 text-sm">
@@ -69,7 +69,7 @@ export default function ContactMeForm() {
             placeholder="vous@entreprise.com"
             disabled={isLoading}
             {...register("email", { required: "L'email est requis" })}
-            className="input rounded-md sm:col-span-1 dark:text-white transition-colors dark:bg-black/30 placeholder:text-muted-foreground"
+            className="input rounded-md w-full sm:col-span-1 dark:text-white transition-colors dark:bg-black/30 placeholder:text-muted-foreground"
           />
           {errors.email && (
             <p className="text-red-500 text-sm">

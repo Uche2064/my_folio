@@ -51,7 +51,7 @@ export default function ContactMeEmail({
               </Text>
               {ipAddress && <Text style={styles.infoText}>
                 <strong>
-                  IP Address : {ipAddress} 
+                  Adresse IP : {ipAddress} 
                   </strong></Text>}
               {phone ? (
                 <Text style={styles.infoText}>
