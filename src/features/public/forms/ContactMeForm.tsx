@@ -1,7 +1,6 @@
 /* eslint-disable @typescript-eslint/no-explicit-any */
 "use client";
 
-import AppInput from "@/components/shared/AppInput";
 import { Button } from "@/components/ui/button";
 
 import { Textarea } from "@/components/ui/textarea";

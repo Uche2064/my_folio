@@ -1,7 +1,4 @@
-import { ModeToggle } from "@/components/shared/ModeToggle";
-import { Button } from "../../../../components/ui/button";
 import Image from "next/image";
-import { Hamburger, Menu } from "lucide-react";
 import { NavMenu } from "./NavMenu";
 
 
