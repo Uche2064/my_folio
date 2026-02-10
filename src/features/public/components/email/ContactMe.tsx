@@ -16,6 +16,7 @@ export interface ContactMeProps {
   message: string;
   phone?: string;
   subject?: string;
+  ipAddress?: string
 }
 
 export default function ContactMeEmail({
@@ -24,6 +25,7 @@ export default function ContactMeEmail({
   message,
   phone,
   subject,
+  ipAddress,
 }: ContactMeProps) {
   const currentHour = new Date().getHours();
   const greeting =
@@ -47,6 +49,10 @@ export default function ContactMeEmail({
               <Text style={styles.infoText}>
                 <strong>Email :</strong> {email}
               </Text>
+              {ipAddress && <Text style={styles.infoText}>
+                <strong>
+                  IP Address : {ipAddress} 
+                  </strong></Text>}
               {phone ? (
                 <Text style={styles.infoText}>
                   <strong>Téléphone :</strong> {phone}

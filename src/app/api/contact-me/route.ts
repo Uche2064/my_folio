@@ -10,6 +10,10 @@ type ContactPayload = {
   message?: string;
 };
 export async function POST(request: NextRequest) {
+  const ipAddress =
+    request.headers.get("x-forwarded-for")?.split(",")[0] ||
+    request.headers.get("x-real-ip") ||
+    "unknown";
   const { name, email, phone, subject, message } =
     (await request.json()) as ContactPayload;
   if (!name || !email || !message) {
@@ -29,6 +33,7 @@ export async function POST(request: NextRequest) {
         phone,
         subject,
         message,
+        ipAddress
       }),
     );
     return NextResponse.json(
